@@ -9,12 +9,12 @@ export class UsersService {
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
   ) {}
 
-  async create(user: UserDto): Promise<User> {
-    return await this.userRepository.create<User>(user);
+  async create(token: UserDto): Promise<User> {
+    return await this.userRepository.create<User>(token);
   }
 
-  async findOneByUsername(username: string): Promise<User> {
-    return await this.userRepository.findOne<User>({ where: { username } });
+  async findOneByToken(token: string): Promise<User> {
+    return await this.userRepository.findOne<User>({ where: { token } });
   }
   async findOneById(id: number): Promise<User> {
     return await this.userRepository.findOne<User>({ where: { id } });
