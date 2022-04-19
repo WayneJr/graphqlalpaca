@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { CommitModule } from './commit/commit.module';
+import { GithubDatasource } from './core/datasource/github.datasource';
 
 @Module({
   imports: [
@@ -14,8 +16,19 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
+      dataSources: () => {
+        return {
+          githubAPI: new GithubDatasource(),
+        };
+      },
+      context: () => {
+        return {
+          token: '',
+        };
+      },
     }),
     AuthModule,
+    CommitModule,
   ],
   controllers: [AppController],
   providers: [AppService],
