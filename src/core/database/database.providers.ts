@@ -1,23 +1,18 @@
-import { Sequelize } from "sequelize-typescript";
-import { SEQUELIZE } from "../constants";
+import { Sequelize } from 'sequelize-typescript';
+import { SEQUELIZE } from '../constants';
+import { User } from '../../users/user.entity';
 
-
-// const config:  = {
-//     type: 'sqlite',
-//     database: 'db',
-//     entities: ['dist/src/**/*.entity.js'],
-//     synchronize: false
-// }
-
-export const databaseProviders = [{
+export const databaseProviders = [
+  {
     provide: SEQUELIZE,
     useFactory: async () => {
-        const sequelize = new Sequelize({
-            dialect: 'sqlite',
-            storage: 'db'
-        })
-        sequelize.addModels([]);
-        await sequelize.sync();
-        return sequelize;
-    }
-}]
+      const sequelize = new Sequelize({
+        dialect: 'sqlite',
+        storage: 'db',
+      });
+      sequelize.addModels([User]);
+      await sequelize.sync();
+      return sequelize;
+    },
+  },
+];
