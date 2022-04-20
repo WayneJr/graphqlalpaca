@@ -16,11 +16,6 @@ import { GithubDatasource } from './core/datasource/github.datasource';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
-      dataSources: () => {
-        return {
-          githubAPI: new GithubDatasource(),
-        };
-      },
       context: ({ req }) => ({ headers: req.headers }),
     }),
     AuthModule,

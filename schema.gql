@@ -68,7 +68,7 @@ type Commit {
 
 type Query {
   hello: String!
-  getCommits: [Commit!]!
+  getCommits(limit: Float!): [Commit!]!
 }
 
 type Mutation {
