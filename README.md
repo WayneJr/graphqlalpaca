@@ -10,6 +10,9 @@ A basic data retrieval GraphQL API using [GitHub REST API](https://developer.git
 $ yarn install
 ```
 
+You'll find a `.env.example` file in the root of the project, you can use that to
+set your own `.env` file with your preferred credentials.
+
 ## Running the app
 
 ```bash
