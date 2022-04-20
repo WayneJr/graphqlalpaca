@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { UserDto } from './dto/user.dto';
 import { USER_REPOSITORY } from 'src/core/constants';
 

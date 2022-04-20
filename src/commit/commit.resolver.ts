@@ -1,17 +1,17 @@
 import { Query, Resolver } from '@nestjs/graphql';
-import { GithubDatasource } from '../core/datasource/github.datasource';
 import { Commit } from './entities/commit.entity';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../auth/auth.guard';
 
 @Resolver()
 export class CommitResolver {
-  constructor(private githubDataSource: GithubDatasource) {}
+  constructor() {}
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  @Query((returns) => Commit)
-  async getCommits() {
+  @Query(() => [Commit])
+  @UseGuards(GqlAuthGuard)
+  async getCommits(_, { limit }, { dataSources }) {
     try {
-      console.log(await this.githubDataSource.getCommits());
-      return await this.githubDataSource.getCommits();
+      return await dataSources.githubAPI.getCommits(limit);
     } catch (err) {
       console.log(err);
     }

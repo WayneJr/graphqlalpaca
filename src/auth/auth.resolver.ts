@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Query } from '@nestjs/graphql';
-import { User } from '../users/user.entity';
+import { User } from '../users/entities/user.entity';
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 
@@ -10,9 +10,9 @@ export class AuthResolver {
     private usersService: UsersService,
   ) {}
 
-  @Query((returns) => User, { name: 'token' })
-  async getToken(id) {
-    return this.usersService.findOneById(id);
+  @Query((returns) => String, { name: 'hello' })
+  async sayHello() {
+    return 'Hello World';
   }
 
   @Mutation((returns) => User)

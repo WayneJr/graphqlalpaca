@@ -67,8 +67,8 @@ type Commit {
 }
 
 type Query {
-  token: User!
-  getCommits: Commit!
+  hello: String!
+  getCommits: [Commit!]!
 }
 
 type Mutation {

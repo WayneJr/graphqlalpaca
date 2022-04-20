@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Request } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './core/database/database.module';
@@ -21,11 +21,7 @@ import { GithubDatasource } from './core/datasource/github.datasource';
           githubAPI: new GithubDatasource(),
         };
       },
-      context: () => {
-        return {
-          token: '',
-        };
-      },
+      context: ({ req }) => ({ headers: req.headers }),
     }),
     AuthModule,
     CommitModule,
